@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class PlayerCollision : MonoBehaviour
 {
     [SerializeField] float dyingDelay = 3f;
+    ParticleSystem deathFX;
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -14,7 +15,9 @@ public class PlayerCollision : MonoBehaviour
 
     IEnumerator Die()
     {
-        //Play Death Particles and Sound
+        deathFX = GetComponentInChildren<ParticleSystem>();
+        deathFX.Play();
+        GetComponent<AudioSource>().Play();
 
         GetComponent<PlayerMovement>().enabled = false;
         yield return new WaitForSeconds(dyingDelay);
