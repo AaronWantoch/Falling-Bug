@@ -14,22 +14,23 @@ public class Menu : MonoBehaviour
 
     PlayerMovement player;
 
+    static int instances;
+
     // Start is called before the first frame update
     void Start()
     {
-        Singleton();
+        instances++;
+        if (instances > 1)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+            
 
         player = FindObjectOfType<PlayerMovement>();
         player.enabled = false;
 
         StartCoroutine(SwapTexts());
-    }
-
-    private void Singleton()
-    {
-        DontDestroyOnLoad(this.gameObject);
-        if (FindObjectsOfType<Menu>().Length > 1)
-            Destroy(this.gameObject);
     }
 
     IEnumerator SwapTexts()
