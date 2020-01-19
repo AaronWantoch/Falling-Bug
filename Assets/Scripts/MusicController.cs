@@ -7,6 +7,9 @@ public class MusicController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        DontDestroyOnLoad(this.gameObject);
+        if (FindObjectsOfType<MusicController>().Length == 1)
+            DontDestroyOnLoad(this.gameObject);
+        else
+            Destroy(this.gameObject);
     }
 }

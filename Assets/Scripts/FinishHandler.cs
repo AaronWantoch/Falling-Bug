@@ -6,12 +6,15 @@ using UnityEngine.SceneManagement;
 public class FinishHandler : MonoBehaviour
 {
     [SerializeField] GameObject victoryScreen;
-    [SerializeField] GameObject music;
+    GameObject music;
 
     private void OnTriggerEnter(Collider other)
     {
         victoryScreen.SetActive(true);
-        music.SetActive(false);
+
+        FindObjectOfType<MusicController>().gameObject.SetActive(false);
+        GetComponent<AudioSource>().Play();
+
         Time.timeScale = 0f;
     }
 
